@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vasavi Club Sydney – Business Directory</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Telugu:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --saffron: #E8650A;
+    --saffron-light: #FFF0E6;
+    --deep: #1A1014;
+    --card-bg: #FDFAF8;
+    --border: #EDE0D8;
+    --text: #2C1810;
+    --muted: #9A7060;
+    --green: #2D7A4F;
+    --tag-bg: #FFF4ED;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F7F0EB;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--deep);
+    padding: 22px 24px 18px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+    overflow: hidden;
+  }
+  .header-top-border {
+    height: 4px;
+    background: linear-gradient(90deg, #C4272F 0%, #E8650A 33%, #F5C518 66%, #C4272F 100%);
+    position: absolute;
+    top: 0; left: 0; right: 0;
+  }
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .logo-emblem {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+  .matha-frame {
+    flex-shrink: 0;
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2.5px solid #F5C518;
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.2), 0 0 12px rgba(232,101,10,0.35);
+    overflow: hidden;
+    background: #1a0a00;
+  }
+  .matha-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+  .logo-sri {
+    font-family: 'Noto Sans Telugu', serif;
+    font-size: 11px;
+    color: rgba(245,197,24,0.7);
+    letter-spacing: 0.5px;
+    margin-bottom: 1px;
+  }
+  .logo-text-block { text-align: left; }
+  .logo-telugu {
+    font-family: 'Noto Sans Telugu', 'Mandali', serif;
+    font-size: 22px;
+    color: #F5C518;
+    line-height: 1.1;
+    letter-spacing: 1px;
+  }
+  .logo-english {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 4vw, 26px);
+    color: #fff;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+  }
+  .logo-english span { color: var(--saffron); }
+  header p {
+    color: rgba(255,255,255,0.45);
+    font-size: 12px;
+    margin-top: 4px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .header-divider {
+    width: 60px;
+    height: 1px;
+    background: rgba(245,197,24,0.35);
+    margin: 10px auto 0;
+  }
+
+  /* SEARCH + FILTER BAR */
+  .controls {
+    max-width: 900px;
+    margin: 24px auto 0;
+    padding: 0 16px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .search-wrap {
+    flex: 1;
+    min-width: 200px;
+    position: relative;
+  }
+  .search-wrap svg {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 16px 12px 42px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border 0.2s;
+  }
+  input[type="text"]:focus { border-color: var(--saffron); }
+  select {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    cursor: pointer;
+    outline: none;
+    min-width: 160px;
+    transition: border 0.2s;
+  }
+  select:focus { border-color: var(--saffron); }
+
+  /* STATS BAR */
+  .stats {
+    max-width: 900px;
+    margin: 14px auto 0;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .count-badge {
+    background: var(--saffron);
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .stats-text { font-size: 13px; color: var(--muted); }
+
+  /* CARDS GRID */
+  .grid {
+    max-width: 900px;
+    margin: 16px auto 40px;
+    padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 20px;
+    transition: transform 0.18s, box-shadow 0.18s;
+    cursor: default;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(232,101,10,0.12);
+    border-color: #D4B5A0;
+  }
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--saffron-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .card-title-wrap { flex: 1; }
+  .card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.35;
+  }
+  .card-category {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--saffron);
+    margin-top: 3px;
+  }
+  .card-divider {
+    height: 1px;
+    background: var(--border);
+  }
+  .card-info { display: flex; flex-direction: column; gap: 7px; }
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 13px;
+  }
+  .info-icon { color: var(--muted); flex-shrink: 0; margin-top: 1px; }
+  .info-text { color: var(--text); line-height: 1.4; }
+  .info-text a {
+    color: var(--saffron);
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .info-text a:hover { text-decoration: underline; }
+  .comment-box {
+    background: #FFF9F5;
+    border-left: 3px solid var(--saffron);
+    border-radius: 0 8px 8px 0;
+    padding: 8px 10px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .cta-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 9px 12px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .btn-call {
+    background: #EDF7F1;
+    color: var(--green);
+    border: 1.5px solid #C0DFD0;
+  }
+  .btn-call:hover { background: #D6EFE2; }
+  .btn-web {
+    background: var(--saffron-light);
+    color: var(--saffron);
+    border: 1.5px solid #F4C9A8;
+  }
+  .btn-web:hover { background: #FDDEC5; }
+
+  /* EMPTY STATE */
+  .empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--muted);
+  }
+  .empty-icon { font-size: 40px; margin-bottom: 12px; }
+  .empty h3 { font-size: 18px; color: var(--text); margin-bottom: 6px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  /* SHARE BANNER */
+  .share-banner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 16px;
+  }
+  .share-inner {
+    background: var(--deep);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .share-text { color: rgba(255,255,255,0.8); font-size: 13px; }
+  .share-text strong { color: white; }
+  .share-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .share-btn:hover { background: #1DA851; }
+
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: 1fr; }
+    header { padding: 20px 16px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top-border"></div>
+
+  <!-- Vasavi Matha photo + text -->
+  <div class="logo-wrap">
+    <div class="matha-frame">
+      <img src="https://vasaviclubs.org/images/vasavimatha.jpg"
+           alt="శ్రీ వాసవి కన్యకా పరమేశ్వరి"
+           class="matha-img"
+           onerror="this.parentNode.innerHTML='<div style=\'width:70px;height:70px;border-radius:50%;background:rgba(245,197,24,0.15);border:2px solid #F5C518;display:flex;align-items:center;justify-content:center;font-size:30px;\'>🙏</div>'"/>
+    </div>
+
+    <div class="logo-text-block">
+      <div class="logo-sri">శ్రీ వాసవి కన్యకా పరమేశ్వరి</div>
+      <div class="logo-telugu">వాసవి క్లబ్ సిడ్నీ</div>
+      <div class="logo-english">Vasavi Club <span>Sydney</span></div>
+    </div>
+  </div>
+
+  <p>Member Business Directory</p>
+  <div class="header-divider"></div>
+</header>
+
+<div style="max-width:900px;margin:20px auto 0;padding:0 16px;">
+  <div class="share-inner">
+    <div class="share-text"><strong>Share with friends & family</strong><br>Send this directory on WhatsApp</div>
+    <a class="share-btn" id="waShareBtn" href="#" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Share on WhatsApp
+    </a>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="search-wrap">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Search by name, category, location…">
+  </div>
+  <select id="categoryFilter">
+    <option value="">All Categories</option>
+  </select>
+</div>
+
+<div class="stats">
+  <span class="count-badge" id="countBadge">14</span>
+  <span class="stats-text" id="statsText">businesses listed</span>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  Vasavi Club Sydney · Member Business Directory · For community use only
+</footer>
+
+<script>
+const businesses = [
+  { name: "NEBESA HOMES PTY LTD", address: "Highpoint Dr, Blacktown NSW 2148", contact: "Sekhar Attelli", phone: "0450 266 778", link: "https://www.facebook.com/share/1EzQMT2SnL/?mibextid=wwXIfr", category: "Construction", comment: "Specialised in residential custom home builds. Have built few homes from VCS family." },
+  { name: "Sri Ganesha Supermarket", address: "3/48 Garfield Road, Riverstone", contact: "Yash & Raghu", phone: "0426 670 384", link: null, category: "Indian Grocery", comment: null },
+  { name: "PartyCallHire", address: "12 Wheedon Street, Glenwood", contact: "Praween or Pavvi", phone: "0430 086 609", link: "http://partycallhire.com.au/", category: "Party Hire", comment: null },
+  { name: "SSRG Properties", address: "307/100 Fairway Drive, Norwest 2153", contact: "Naveen", phone: "0470 467 709", link: "https://www.facebook.com/NaveenPabbisettyPropertyConsultant/", category: "Real Estate", comment: null },
+  { name: "Drive2Door", address: "266 Pennant Hills Rd, Thornleigh 2120", contact: "Vinay", phone: "+61 434 748 305", link: "https://facebook.com/Drive2Door", category: "Private Transfers", comment: "For discount please mention you are from VCS group." },
+  { name: "Gurukula Yoga, Therapy & Ayurveda", address: "110 Trobriand Crescent, Glenfield NSW 2167", contact: "Dr. Raju", phone: "+61 415 448 743", link: "https://www.gurukula.com.au", category: "Health & Wellness", comment: null },
+  { name: "The Good Physio Co", address: "Kellyville & Baulkham Hills", contact: "Bindu", phone: "0432 529 710", link: "https://www.thegoodphysioco.com.au", category: "Health & Wellness", comment: null },
+  { name: "Kellyville Groceries", address: "Shop 1, 27 Windsor Rd, Kellyville NSW", contact: "Ashok", phone: "0433 255 551", link: "https://kellyvillegroceries.com.au", category: "Indian Grocery", comment: "For special prices and deals please contact directly." },
+  { name: "Alankar by Prathima", address: "Mobile service / Burwood", contact: "Prathima", phone: "0492 831 175", link: "https://www.instagram.com/alankar_by_prathima/", category: "Beauty & Fashion", comment: null },
+  { name: "SMIYA Homes", address: "Kellyville NSW 2155", contact: "Santosh Tallapally", phone: "0433 201 894", link: null, category: "Construction", comment: null },
+  { name: "ImpraVise", address: "14 Lexington Drive, Bella Vista NSW 2153", contact: "Dinesh Dindukurthi", phone: "0414 572 945", link: "https://impravise.com/", category: "Cybersecurity", comment: null },
+  { name: "Alankruthi Event Decors", address: "The Ponds, Schofields & Marsden Park", contact: "Pavan Polishetti", phone: "0469 766 998", link: "https://www.facebook.com/alankruthi.eventdecors", category: "Event Management", comment: null },
+  { name: "SG Portraiture", address: "Schofields NSW", contact: "Swathi Gunda", phone: "0475 738 697", link: "https://www.instagram.com/sgportraiture", category: "Photography", comment: "Special discount to VCS members — DM on WhatsApp for info." },
+  { name: "Luminous Classics", address: "The Ponds NSW", contact: "Santhoshi Grandhi", phone: "0423 013 116", link: "https://www.instagram.com/luminousclassics/", category: "Gifts & Candles", comment: null },
+];
+
+const categoryIcons = {
+  "Construction": "🏗️",
+  "Indian Grocery": "🛒",
+  "Party Hire": "🎉",
+  "Real Estate": "🏠",
+  "Private Transfers": "🚗",
+  "Health & Wellness": "🧘",
+  "Beauty & Fashion": "💄",
+  "Cybersecurity": "🔒",
+  "Event Management": "🎊",
+  "Photography": "📸",
+  "Gifts & Candles": "🕯️",
+};
+
+function normalizeLink(url) {
+  if (!url) return null;
+  if (url.startsWith('http')) return url;
+  return 'https://' + url;
+}
+
+function renderCard(b) {
+  const icon = categoryIcons[b.category] || "💼";
+  const tel = b.phone.replace(/\s+/g,'').replace(/\//g, '');
+  const linkUrl = normalizeLink(b.link);
+  const isInsta = linkUrl && linkUrl.includes('instagram');
+  const isFb = linkUrl && linkUrl.includes('facebook');
+  const linkLabel = isInsta ? 'Instagram' : isFb ? 'Facebook' : 'Website';
+
+  return `
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">${icon}</div>
+        <div class="card-title-wrap">
+          <div class="card-name">${b.name}</div>
+          <div class="card-category">${b.category}</div>
+        </div>
+      </div>
+      <div class="card-divider"></div>
+      <div class="card-info">
+        <div class="info-row">
+          <svg class="info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div class="info-text">${b.address}</div>
+        </div>
+        <div class="info-row">
+          <svg class="info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <div class="info-text">${b.contact}</div>
+        </div>
+      </div>
+      ${b.comment ? `<div class="comment-box">💡 ${b.comment}</div>` : ''}
+      <div class="cta-row">
+        <a class="btn btn-call" href="tel:${tel}">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.77a16 16 0 006.29 6.29l1.3-1.3a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          Call
+        </a>
+        <a class="btn btn-call" href="https://wa.me/61${tel.replace(/^0/,'').replace(/^\+61/,'')}" target="_blank" style="background:#EDF7F1;color:#2D7A4F;border-color:#C0DFD0;">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+        ${linkUrl ? `
+        <a class="btn btn-web" href="${linkUrl}" target="_blank">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          ${linkLabel}
+        </a>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+// Populate category filter
+const cats = [...new Set(businesses.map(b => b.category))].sort();
+const sel = document.getElementById('categoryFilter');
+cats.forEach(c => {
+  const opt = document.createElement('option');
+  opt.value = c; opt.textContent = c;
+  sel.appendChild(opt);
+});
+
+function render() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const cat = document.getElementById('categoryFilter').value;
+  const filtered = businesses.filter(b => {
+    const matchQ = !q || [b.name, b.category, b.address, b.contact, b.comment].some(f => f && f.toLowerCase().includes(q));
+    const matchC = !cat || b.category === cat;
+    return matchQ && matchC;
+  });
+  const grid = document.getElementById('grid');
+  document.getElementById('countBadge').textContent = filtered.length;
+  document.getElementById('statsText').textContent = filtered.length === 1 ? 'business found' : 'businesses listed';
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><h3>No matches found</h3><p>Try a different search or category</p></div>`;
+  } else {
+    grid.innerHTML = filtered.map(renderCard).join('');
+  }
+}
+
+document.getElementById('searchInput').addEventListener('input', render);
+document.getElementById('categoryFilter').addEventListener('change', render);
+
+// WhatsApp share
+document.getElementById('waShareBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  const pageUrl = window.location.href;
+  const msg = encodeURIComponent("📋 *Vasavi Club Sydney – Business Directory*\n\nSupport our community members! Browse all VCS member businesses here:\n" + pageUrl);
+  window.open("https://wa.me/?text=" + msg, "_blank");
+});
+
+render();
+</script>
+</body>
+</html>
